@@ -57,7 +57,7 @@ declare module 'redis' {
         appendAsync(key: string, value: string): Promise<Number>;
         getAsync(key: string): Promise<String>;
 
-        select(index: number | string): Promise<string>;
+        selectAsync(index: number | string): Promise<string>;
     
         /**
          * Set the string value of a key.
