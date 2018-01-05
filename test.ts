@@ -4,9 +4,9 @@ import * as u from "./index"
     let redisClient: u.redis.RedisClient | null = null
     try {
         redisClient = u.createClient()
-        console.log(await redisClient.appendAsync("12", "455"))
-        await u.sleep()
-        console.log(await redisClient.appendAsync("12", "455"))
+        console.log(await redisClient.appendAsync("12", "123"))
+        await u.sleep(3000)
+        console.log(await redisClient.setAsync("12", "456"))
         console.log(await redisClient.getAsync("12"))
     } catch (err) {
         console.log(err)
