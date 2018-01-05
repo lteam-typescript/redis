@@ -2,7 +2,8 @@
   "name": "promisify-redis",
   "version": "1.0.0",
   "description": "Provide typescript and promisify redis wrapper",
-  "main": "index.js",
+  "main": "./index.js",
+  "typings": "./index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
