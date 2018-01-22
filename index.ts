@@ -54,6 +54,16 @@ export function sleep(sleepIntervalInMillis: number = 5000) {
 
 declare module 'redis' {
 
+    export interface OverloadedCommandAsync<T, U> {
+        (arg1: T, arg2: T, arg3: T, arg4: T, arg5: T, arg6: T): Promise<U>;
+        (arg1: T, arg2: T, arg3: T, arg4: T, arg5: T): Promise<U>;
+        (arg1: T, arg2: T, arg3: T, arg4: T): Promise<U>;
+        (arg1: T, arg2: T, arg3: T): Promise<U>;
+        (arg1: T, arg2: T | T[]): Promise<U>; // Notice, only diff from OverloadedListCommandAsync
+        (arg1: T | T[]): Promise<U>;
+        (...args: Array<T>): Promise<U>;
+    }
+
     export interface OverloadedKeyCommandAsync<T, U> {
         (key: string, arg1: T, arg2: T, arg3: T, arg4: T, arg5: T, arg6: T): Promise<U>;
         (key: string, arg1: T, arg2: T, arg3: T, arg4: T, arg5: T): Promise<U>;
@@ -65,8 +75,31 @@ declare module 'redis' {
         (...args: Array<string | T>): Promise<U>;
     }
 
+    export interface OverloadedListCommandAsync<T, U> {
+        (arg1: T, arg2: T, arg3: T, arg4: T, arg5: T, arg6: T): Promise<U>;
+        (arg1: T, arg2: T, arg3: T, arg4: T, arg5: T): Promise<U>;
+        (arg1: T, arg2: T, arg3: T, arg4: T): Promise<U>;
+        (arg1: T, arg2: T, arg3: T): Promise<U>;
+        (arg1: T, arg2: T): Promise<U>;
+        (arg1: T | T[]): Promise<U>;
+        (...args: Array<T>): Promise<U>;
+    }
+
+
     export interface RedisClient extends NodeJS.EventEmitter {
+
+        publishAsync(channel: string, value: string): Promise<number>;
+
+        subscribeAsync: OverloadedListCommandAsync<string, string>;
+        unsubscribeAsync: OverloadedListCommandAsync<string, string>;
+
         appendAsync(key: string, value: string): Promise<Number>
+
+        evalshaAsync: OverloadedCommandAsync<string | number, any>;
+        existsAsync: OverloadedCommandAsync<string, number>
+
+        expireAsync(key: string, seconds: number): Promise<number>
+        expireatAsync(key: string, timestamp: number): Promise<number>
 
         getAsync(key: string): Promise<String>
 
@@ -74,6 +107,8 @@ declare module 'redis' {
 
         getrangeAsync(key: string, start: number, end: number): Promise<string>
         getsetAsync(key: string, value: string): Promise<string>
+
+        // h series function for hash
 
         hdelAsync: OverloadedKeyCommandAsync<string, number>
 
@@ -112,7 +147,7 @@ declare module 'redis' {
 
         setrangeAsync(key: string, offset: number, value: string): Promise<number>;
 
-        // list operation
+        // r series for list operation
         rpopAsync(key: string): Promise<string>
         rpoplpushAsync(source: string, destination: string): Promise<string>
 
