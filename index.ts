@@ -53,9 +53,38 @@ export function sleep(sleepIntervalInMillis: number = 5000) {
 }
 
 declare module 'redis' {
+
+    export interface OverloadedKeyCommandAsync<T, U> {
+        (key: string, arg1: T, arg2: T, arg3: T, arg4: T, arg5: T, arg6: T): Promise<U>;
+        (key: string, arg1: T, arg2: T, arg3: T, arg4: T, arg5: T): Promise<U>;
+        (key: string, arg1: T, arg2: T, arg3: T, arg4: T): Promise<U>;
+        (key: string, arg1: T, arg2: T, arg3: T): Promise<U>;
+        (key: string, arg1: T, arg2: T): Promise<U>;
+        (key: string, arg1: T| T[]): Promise<U>;
+        (key: string, ...args: Array<T>): Promise<U>;
+        (...args: Array<string | T>): Promise<U>;
+    }
+
     export interface RedisClient extends NodeJS.EventEmitter {
-        appendAsync(key: string, value: string): Promise<Number>;
-        getAsync(key: string): Promise<String>;
+        appendAsync(key: string, value: string): Promise<Number>
+        getAsync(key: string): Promise<String>
+
+
+        hincrbyfloatAsync(key: string, field: string, increment: number): Promise<number>;
+
+        hkeysAsync(key: string): Promise<string[]>
+
+        hgetAsync(key: string, field: string): Promise<string>
+        hgetallAsync(key: string): Promise<{ [key: string]: string }>
+
+        hlenAsync(key: string): Promise<number>
+
+        hsetAsync(key: string, field: string, value: string): Promise<number>
+        hsetnxAsync(key: string, field: string, value: string): Promise<number>
+        
+        hstrlenAsync(key: string, field: string): Promise<number>
+        hvalsAsync(key: string): Promise<string[]>
+
 
         selectAsync(index: number | string): Promise<string>;
     
@@ -66,6 +95,20 @@ declare module 'redis' {
         setAsync(key: string, value: string, flag: string): Promise<'OK'>;
         setAsync(key: string, value: string, mode: string, duration: number): Promise<'OK'>;
         setAsync(key: string, value: string, mode: string, duration: number, flag: string): Promise<'OK'>;
+
+        setbitAsync(key: string, offset: number, value: string): Promise<number>
+
+        setexAsync(key: string, seconds: number, value: string): Promise<string>;
+        setnxAsync(key: string, value: string): Promise<number>;
+
+        setrangeAsync(key: string, offset: number, value: string): Promise<number>;
+
+        // list operation
+        rpopAsync(key: string): Promise<string>
+        rpoplpushAsync(source: string, destination: string): Promise<string>
+
+        rpushAsync: OverloadedKeyCommandAsync<string, number>;
+        rpushxAsync(key: string, value: string): Promise<number>;
 
 
         quitAsync(): Promise<'OK'>;
