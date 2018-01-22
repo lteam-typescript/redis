@@ -67,15 +67,24 @@ declare module 'redis' {
 
     export interface RedisClient extends NodeJS.EventEmitter {
         appendAsync(key: string, value: string): Promise<Number>
+
         getAsync(key: string): Promise<String>
 
+        getbitAsync(key: string, offset: number): Promise<number>
+
+        getrangeAsync(key: string, start: number, end: number): Promise<string>
+        getsetAsync(key: string, value: string): Promise<string>
+
+        hdelAsync: OverloadedKeyCommandAsync<string, number>
+
+        hexistsAsync(key: string, field: string): Promise<number>
+
+        hgetAsync(key: string, field: string): Promise<string>
+        hgetallAsync(key: string): Promise<{ [key: string]: string }>
 
         hincrbyfloatAsync(key: string, field: string, increment: number): Promise<number>;
 
         hkeysAsync(key: string): Promise<string[]>
-
-        hgetAsync(key: string, field: string): Promise<string>
-        hgetallAsync(key: string): Promise<{ [key: string]: string }>
 
         hlenAsync(key: string): Promise<number>
 
