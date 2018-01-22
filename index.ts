@@ -60,7 +60,7 @@ declare module 'redis' {
         (key: string, arg1: T, arg2: T, arg3: T, arg4: T): Promise<U>;
         (key: string, arg1: T, arg2: T, arg3: T): Promise<U>;
         (key: string, arg1: T, arg2: T): Promise<U>;
-        (key: string, arg1: T| T[]): Promise<U>;
+        (key: string, arg1: T | T[]): Promise<U>;
         (key: string, ...args: Array<T>): Promise<U>;
         (...args: Array<string | T>): Promise<U>;
     }
@@ -81,13 +81,13 @@ declare module 'redis' {
 
         hsetAsync(key: string, field: string, value: string): Promise<number>
         hsetnxAsync(key: string, field: string, value: string): Promise<number>
-        
+
         hstrlenAsync(key: string, field: string): Promise<number>
         hvalsAsync(key: string): Promise<string[]>
 
 
         selectAsync(index: number | string): Promise<string>;
-    
+
         /**
          * Set the string value of a key.
          */
