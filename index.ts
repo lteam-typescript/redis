@@ -88,7 +88,17 @@ declare module 'redis' {
 
     export interface RedisClient extends NodeJS.EventEmitter {
 
+        monitorAsync(): Promise<undefined>;
+
+        infoAsync(): Promise<ServerInfo>;
+        infoAsync(section?: string | string[]): Promise<ServerInfo>;
+
+        pingAsync(): Promise<string>;
+        pingAsync(message: string): Promise<string>;
+
         publishAsync(channel: string, value: string): Promise<number>;
+
+        authAsync(password: string): Promise<string>;
 
         subscribeAsync: OverloadedListCommandAsync<string, string>;
         unsubscribeAsync: OverloadedListCommandAsync<string, string>;
