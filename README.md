@@ -2,7 +2,7 @@
 Provide typescript and promisify redis wrapper
 
 ```
-npm install git+https://github.com/lteam18/promisify-redis.git#release
+npm install git+https://github.com/lteam18/redis-promise-typescript.git
 ```
 
 # Create a redis client with retry strategy
