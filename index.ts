@@ -55,6 +55,11 @@ export function sleep(sleepIntervalInMillis: number = 5000) {
     })
 }
 
+export type HOST_PORT = {
+    host: string,
+    port: number
+}
+
 declare module 'redis' {
 
     export interface OverloadedCommandAsync<T, U> {
