@@ -108,7 +108,7 @@ declare module 'redis' {
         psubscribeAsync: OverloadedListCommandAsync<string, string>;
         punsubscribeAsync: OverloadedListCommandAsync<string, string>;
 
-        appendAsync(key: string, value: string): Promise<Number>
+        appendAsync(key: string, value: string): Promise<number>
 
         evalshaAsync: OverloadedCommandAsync<string | number, any>;
         existsAsync: OverloadedCommandAsync<string, number>
@@ -116,7 +116,7 @@ declare module 'redis' {
         expireAsync(key: string, seconds: number): Promise<number>
         expireatAsync(key: string, timestamp: number): Promise<number>
 
-        getAsync(key: string): Promise<String>
+        getAsync(key: string): Promise<string>
 
         getbitAsync(key: string, offset: number): Promise<number>
 
