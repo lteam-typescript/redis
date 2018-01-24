@@ -18,7 +18,7 @@ npm install git+https://github.com/edwinjhlee/promisify-redis.git#release
   1. 也许会跟不上最新client变化 - 幸好redis已经很稳定了
   2. 也许会出现def错误 - 不断维护即可，这种问题是有限的
 
-因此，综上，我们决定坚持使用自己设计和维护的`promisify-redis`，虽然我们非常钦佩`handy-redis`的技术含量
+因此，综上，我们决定坚持使用并维护`promisify-redis`，虽然我们非常钦佩`handy-redis`的技术含量
 
 # Create a redis client with retry strategy
 
