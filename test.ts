@@ -3,7 +3,7 @@ import * as u from "./index"
 (async () => {
     let redisClient: u.redis.RedisClient | null = null
     try {
-        redisClient = u.createClient()
+        redisClient = u.ClientBuilder.withRetryStrategy()
         console.log(await redisClient.appendAsync("12", "123"))
         await u.sleep(3000)
         console.log(await redisClient.setAsync("12", "456"))
