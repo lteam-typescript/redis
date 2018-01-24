@@ -3,12 +3,12 @@
 import * as bb from 'bluebird'
 import * as redis from 'redis'
 
-export namespace ClientBuilder{
+export function createClient(options?: redis.ClientOpts | undefined) {
+    const oldRedisClient = redis.createClient(options)
+    return bb.promisifyAll(oldRedisClient) as redis.RedisClient; // cast
+}
 
-    export function withOption(options: {}) {
-        const oldRedisClient = redis.createClient(options)
-        return bb.promisifyAll(oldRedisClient) as redis.RedisClient; // cast
-    }
+export namespace ClientBuilder{
 
     export function withRetryStrategy(
         port: number = 6379,
@@ -17,7 +17,7 @@ export namespace ClientBuilder{
         MAX_RETRY_TIME_IN_MILLIS = -1,
         QUIT_IF_ECONNREFUSED = false
     ) {
-        return withOption({
+        return createClient({
             port,
             host,
             retry_strategy: function(options: any) {
