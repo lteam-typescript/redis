@@ -102,8 +102,8 @@ declare module 'redis' {
 
         subscribeAsync: OverloadedListCommandAsync<string, string>;
         unsubscribeAsync: OverloadedListCommandAsync<string, string>;
-        psubscribe: OverloadedListCommandAsync<string, string>;
-        punsubscribe: OverloadedListCommandAsync<string, string>;
+        psubscribeAsync: OverloadedListCommandAsync<string, string>;
+        punsubscribeAsync: OverloadedListCommandAsync<string, string>;
 
         appendAsync(key: string, value: string): Promise<Number>
 
