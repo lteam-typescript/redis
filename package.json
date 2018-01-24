@@ -1,5 +1,5 @@
 {
-  "name": "promisify-redis",
+  "name": "redis-promise-typescript",
   "version": "1.0.0",
   "description": "Provide typescript and promisify redis wrapper",
   "main": "./index.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edwinjhlee/promisify-redis.git"
+    "url": "git+https://github.com/edwinjhlee/redis-promise-typescript.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/edwinjhlee/promisify-redis/issues"
+    "url": "https://github.com/edwinjhlee/redis-promise-typescript/issues"
   },
-  "homepage": "https://github.com/edwinjhlee/promisify-redis#readme",
+  "homepage": "https://github.com/edwinjhlee/redis-promise-typescript#readme",
   "devDependencies": {
     "@types/node": "^4.0.35",
     "ts-lint": "^4.5.1",
