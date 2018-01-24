@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/edwinjhlee/redis-promise-typescript.git"
+    "url": "git+https://github.com/lteam18/redis-promise-typescript.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/edwinjhlee/redis-promise-typescript/issues"
+    "url": "https://github.com/lteam18/redis-promise-typescript/issues"
   },
-  "homepage": "https://github.com/edwinjhlee/redis-promise-typescript#readme",
+  "homepage": "https://github.com/lteam18/redis-promise-typescript#readme",
   "devDependencies": {
     "@types/node": "^4.0.35",
     "ts-lint": "^4.5.1",

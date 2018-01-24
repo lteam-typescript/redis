@@ -2,7 +2,7 @@
 Provide typescript and promisify redis wrapper
 
 ```
-npm install git+https://github.com/edwinjhlee/promisify-redis.git#release
+npm install git+https://github.com/lteam18/promisify-redis.git#release
 ```
 
 # A more advanced library
