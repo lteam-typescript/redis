@@ -4,15 +4,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const bb = require("bluebird");
 const redis = require("redis");
 exports.redis = redis;
+function createClient(options) {
+    const oldRedisClient = redis.createClient(options);
+    return bb.promisifyAll(oldRedisClient); // cast
+}
+exports.createClient = createClient;
 var ClientBuilder;
 (function (ClientBuilder) {
-    function withOption(options) {
-        const oldRedisClient = redis.createClient(options);
-        return bb.promisifyAll(oldRedisClient); // cast
-    }
-    ClientBuilder.withOption = withOption;
     function withRetryStrategy(port = 6379, host = "127.0.0.1", MAX_ATTEMPT = -1, MAX_RETRY_TIME_IN_MILLIS = -1, QUIT_IF_ECONNREFUSED = false) {
-        return withOption({
+        return createClient({
             port,
             host,
             retry_strategy: function (options) {
