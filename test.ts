@@ -113,3 +113,48 @@ async function testSubscribe() {
     }
     
 }
+
+async function testTransactions() {
+    let redisClient: u.redis.RedisClient | null = null
+    try {
+        redisClient = u.ClientBuilder.withRetryStrategy()
+        
+        redisClient.multi([
+            ["set", "a", 1],
+            ["set", "b", "b"],
+            ["incr", "b"],   //apparently wrong action
+            ["incr", "a"]
+        ]).exec((err, replay) =>{
+            //no Error
+            if(err) {
+                console.log("Error:" + err.message)
+            }
+            else {
+                console.log("no Error")
+            }
+
+            /**
+             * OK
+             * OK
+             * { ReplyError: ERR value is not an integer or out of range
+             *     at parseError (/scratch/git-storage/ts/redis-promise-typescript/node_modules/redis-parser/lib/parser.js:193:12)
+             *     at parseType (/scratch/git-storage/ts/redis-promise-typescript/node_modules/redis-parser/lib/parser.js:303:14) code: 'ERR', command: 'INCR' }
+             * 2
+             */
+            replay.forEach((value, index, array) => {
+                console.log(value)
+            })
+        })
+
+        console.log(await redisClient.getAsync("a")) // 2
+        console.log(await redisClient.delAsync("a", "b")) // 2 
+    } catch (err) {
+        console.log(err)
+        console.trace(err)
+    } finally {
+        if (redisClient !== null) {
+            await redisClient.quitAsync()
+        }
+    }
+}
+
